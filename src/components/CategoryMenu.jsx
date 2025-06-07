@@ -4,7 +4,7 @@ const categories = ["Сериалы", "Ситкомы", "Мультсериал�
 
 function CategoryMenu({ selected, onSelect }) {
   return (
-    <div className="category">
+    <>
       {categories.map((cat) => (
         <button
           key={cat}
@@ -14,7 +14,7 @@ function CategoryMenu({ selected, onSelect }) {
           {cat}
         </button>
       ))}
-    </div>
+    </>
   );
 }
 

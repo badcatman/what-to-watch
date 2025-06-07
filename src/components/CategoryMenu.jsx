@@ -8,7 +8,7 @@ function CategoryMenu({ selected, onSelect }) {
       {categories.map((cat) => (
         <button
           key={cat}
-          className={\`category-button \${cat === selected ? "active" : ""}\`}
+          className={`category-button ${cat === selected ? "active" : ""}`}
           onClick={() => onSelect(cat)}
         >
           {cat}

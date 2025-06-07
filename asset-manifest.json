@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/badcatman/what-to-watch/static/css/main.3b732a56.css",
+    "main.js": "/badcatman/what-to-watch/static/js/main.68e7f338.js",
+    "index.html": "/badcatman/what-to-watch/index.html",
+    "main.3b732a56.css.map": "/badcatman/what-to-watch/static/css/main.3b732a56.css.map",
+    "main.68e7f338.js.map": "/badcatman/what-to-watch/static/js/main.68e7f338.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3b732a56.css",
+    "static/js/main.68e7f338.js"
+  ]
+}

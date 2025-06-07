@@ -72,16 +72,16 @@ function Carousel({ items }) {
       <div className="grid">
         {currentItems.map((item) => {
           const isExpanded = expandedItems[item.title];
-          const shortText = item.description.slice(0, 70) + "...";
+          const shortText = item.description.slice(0, 30) + "...";
 
           return (
             <div className="card" key={item.title} onClick={() => toggleDescription(item.title)}>
               <img src={item.poster} alt={item.title} />
               <div className="card-content">
-                <h3>{item.title}</h3>
-                <p>
+                <h3 className="card-title">{item.title}</h3>
+                <div>
                   {isExpanded ? item.description : shortText}
-                </p>
+                </div>
               </div>
             </div>
           );

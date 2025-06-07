@@ -9,6 +9,16 @@ body {
   padding: 20px;
 }
 
+.header {
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.header-container {
+  display: flex;
+}
+
 .category-button {
   margin: 5px;
   padding: 10px 15px;
@@ -56,4 +66,8 @@ body {
 
 .card-content {
   padding: 10px;
+}
+
+.card-title {
+  margin: 5px;
 }

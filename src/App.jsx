@@ -8,8 +8,11 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Что посмотреть?</h1>
+      <div className="header-container">
+<span className="header">Что посмотреть?</span>
       <CategoryMenu selected={category} onSelect={setCategory} />
+      </div>
+    
       <Carousel items={content[category]} />
     </div>
   );

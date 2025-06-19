@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function Carousel({ items, onRate, onToggleWatched, onDelete }) {
-  const [index, setIndex] = useState(0);
+function Carousel({ items, currentPage, onPageChange, onRate, onToggleWatched, onDelete }) {
   const [expanded, setExpanded] = useState([]);
   const [touchStartX, setTouchStartX] = useState(null);
 
@@ -21,12 +20,12 @@ function Carousel({ items, onRate, onToggleWatched, onDelete }) {
     });
   };
 
-  const next = () => setIndex((prev) => Math.min(prev + 1, maxIndex));
-  const prev = () => setIndex((prev) => Math.max(prev - 1, 0));
+  const next = () => onPageChange(Math.min(currentPage + 1, maxIndex));
+  const prev = () => onPageChange(Math.max(currentPage - 1, 0));
 
   const currentItems = items.slice(
-    index * itemsPerPage,
-    index * itemsPerPage + itemsPerPage
+    currentPage * itemsPerPage,
+    currentPage * itemsPerPage + itemsPerPage
   );
 
   const handleTouchStart = (e) => setTouchStartX(e.touches[0].clientX);
@@ -39,15 +38,12 @@ function Carousel({ items, onRate, onToggleWatched, onDelete }) {
   };
 
   return (
-    <div
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-    >
+    <div onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <div style={{ marginTop: "10px" }}>
-        <button className="category-button" onClick={prev} disabled={index === 0}>
+        <button className="category-button" onClick={prev} disabled={currentPage === 0}>
           ←
         </button>
-        <button className="category-button" onClick={next} disabled={index === maxIndex}>
+        <button className="category-button" onClick={next} disabled={currentPage === maxIndex}>
           →
         </button>
       </div>
@@ -58,8 +54,11 @@ function Carousel({ items, onRate, onToggleWatched, onDelete }) {
             <img src={item.poster} alt={item.title} />
             <div className="card-content">
               <h3>{item.title}</h3>
-              <p onClick={() => handleToggleExpand(i + index * itemsPerPage)} style={{ cursor: "pointer" }}>
-                {expanded[i + index * itemsPerPage]
+              <p
+                onClick={() => handleToggleExpand(i + currentPage * itemsPerPage)}
+                style={{ cursor: "pointer" }}
+              >
+                {expanded[i + currentPage * itemsPerPage]
                   ? item.description
                   : item.description.split(".")[0] + "..."}
               </p>
@@ -68,7 +67,7 @@ function Carousel({ items, onRate, onToggleWatched, onDelete }) {
                   {[1, 2, 3, 4, 5].map((star) => (
                     <span
                       key={star}
-                      onClick={() => onRate(i + index * itemsPerPage, star)}
+                      onClick={() => onRate(i + currentPage * itemsPerPage, star)}
                       style={{ color: (item.rating || 0) >= star ? "gold" : "#ccc", cursor: "pointer" }}
                     >
                       ★
@@ -79,10 +78,10 @@ function Carousel({ items, onRate, onToggleWatched, onDelete }) {
                   <input
                     type="checkbox"
                     checked={item.watched || false}
-                    onChange={() => onToggleWatched(i + index * itemsPerPage)}
+                    onChange={() => onToggleWatched(i + currentPage * itemsPerPage)}
                   /> Просмотрено
                 </label>
-                <button onClick={() => onDelete(i + index * itemsPerPage)}>Скрыть</button>
+                <button onClick={() => onDelete(i + currentPage * itemsPerPage)}>Скрыть</button>
               </div>
             </div>
           </div>

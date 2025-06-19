@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 
-function AddItemForm({ categories, onAdd, onCancel }) {
+function AddItemForm({ categories = [], onAdd, onCancel }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(() =>
+    categories.length > 0 ? categories[0] : ""
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!title || !description) return;
+    if (!title || !description || !category) return;
 
     const newItem = {
       title,
       description,
-      poster: "posters/placeholder.jpg", // Можно позже сделать поле
+      poster: "posters/placeholder.jpg", // можно позже расширить
       watched: false,
       rating: 0,
     };
 
     onAdd(category, newItem);
   };
+
+  if (!categories || categories.length === 0) {
+    return <p>Нет доступных категорий для добавления.</p>;
+  }
 
   return (
     <form className="add-form" onSubmit={handleSubmit}>
@@ -46,6 +52,7 @@ function AddItemForm({ categories, onAdd, onCancel }) {
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          required
         >
           {categories.map((cat) => (
             <option key={cat}>{cat}</option>
